@@ -1,6 +1,6 @@
 
 # APIC URL/IP address and the credential
-APIC = "https://apic.ashk.io"  # type: str
+APIC = "https://1.1.1.1."  # type: str
 USER = "admin"
-PASS = "C1sc0123"
+PASS = "xxx"
 
