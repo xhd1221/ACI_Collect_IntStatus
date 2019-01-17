@@ -47,7 +47,7 @@ def gen_intf_report(session, report_file_name):
 				# print(intf.dn)
 				frame = frame.append(pd.DataFrame(data), sort=False)
 				index_n[0] += 1
-			break
+			#break
 	frame.name = 'Intf_Info'
 	# Save the result of all interface status
 	to_excel_file(frame, report_file_name, False)
@@ -68,7 +68,7 @@ def gen_updown_report(frame, report_file_name):
 	leafintf_up_down = df_reindex(leafintf_up_down, 'No')
 	# Save the filtering result
 	to_excel_file(leafintf_up_down, report_file_name, False)
-	print("Script run time is : %.03f seconds" % (time.clock()))
+	#print("Script run time is : %.03f seconds" % (time.clock()))
 	# Return up/down port list
 	return leafintf_up_down
 
