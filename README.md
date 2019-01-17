@@ -2,7 +2,8 @@
 Author: Haden Xu (haidoxu@cisco.com)
 
 # Description
-Script to collec ACI interface status and shutdown the interface in up/down status.
+Script to collect ACI interface status and shutdown the interface in up/down status.
+The Script is based on ACI cobra SDK.
 
 # Environment 
 Required
