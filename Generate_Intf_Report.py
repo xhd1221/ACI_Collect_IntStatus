@@ -1,15 +1,13 @@
-
 # This module is to generate the interface status report.
 # which is a .xlsx file and generated in the same path with this script
 
 # list of other .py files
 from Functions import *
 from Output import *
-
+from Log import *
 
 # list of packages that should be imported for this code to work
 import pandas as pd
-import time
 
 
 # Generate status report for all interfaces.
@@ -27,7 +25,8 @@ def gen_intf_report(session, report_file_name):
 		nodes = get_nodes(session, pod)
 		non_apic_nodes = get_non_apic_nodes(nodes)
 		for node in non_apic_nodes:
-			print('Proceeding ' + str(node.rn))
+			# print('Proceeding ' + str(node.rn))
+			logger.debug('Proceeding ' + str(node.rn))
 			# get interface list
 			intf_list = get_intf_list(session, node)
 			# get ethernet PM list
@@ -51,6 +50,7 @@ def gen_intf_report(session, report_file_name):
 	frame.name = 'Intf_Info'
 	# Save the result of all interface status
 	to_excel_file(frame, report_file_name, False)
+	logger.info('ACI Interface Report Generated...')
 	# print("Script run time is : %.03f seconds" % (time.clock()))
 	# Generate leaf interfaces in up/down status report
 	# meanwhile return the up/down port list

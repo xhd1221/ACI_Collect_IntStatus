@@ -1,7 +1,7 @@
 # This module contains basic functions
 
 # list of other .py files
-
+from Log import *
 
 # list of packages that should be imported for this code to work
 import numpy as np
@@ -19,12 +19,14 @@ def aci_login(APIC, USER, PASS):
     login = cobra.mit.session.LoginSession(APIC, USER, PASS, secure=False, timeout=180)
     session = cobra.mit.access.MoDirectory(login)
     session.login()
+    logger.info('Connected to APIC successfully...')
     return session
 
 
 # Logout
 def aci_logout(session):
     session.logout()
+    logger.info('Logged out from APIC successfully!!!')
 
 
 # Get the list of pods of a ACI fabric
@@ -114,6 +116,7 @@ def shut_intf(session, intf_tDn, if_commit=True):
 # Commit the change to ACI
 def commit_change(session, change):
     session.commit(change)
+    logger.info('Change Committed...')
 
 
 # Print Cobra DN to XML code
