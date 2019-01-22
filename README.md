@@ -11,3 +11,5 @@ Required
 * pandas
 * numpy
 * openpyxl
+
+# Tested on ACI 2.3.1f and 4.0.1h
