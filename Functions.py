@@ -5,6 +5,7 @@ from Log import *
 
 # list of packages that should be imported for this code to work
 import numpy as np
+import pandas as pd
 import urllib3
 import cobra.mit.access
 import cobra.mit.session
@@ -138,3 +139,23 @@ def get_tDN(data):
 def get_leafno_tDN(node_id):
     return '/paths-' + node_id.split('-')[1]
 
+
+# Load an Excel file to a Pandas DataFrame
+def load_excel_file(filename, sheetname):
+    return pd.read_excel(filename, sheet_name=sheetname)
+
+
+# Insert a column and determin if the switch is free(no host connection)
+def if_free_swtich(df):
+    df.insert(3, 'If_FreeSW', np.nan)
+    node_list = df.drop_duplicates(['Leaf']).Leaf.values.tolist()
+    for node in node_list:
+        if len(df[(df['Leaf'] == node) & (df['Port Type'] == 'leaf') & (df['Status'] == 'down')]) >= 40:
+            df.loc[df['Leaf'] == node, 'If_FreeSW'] = True
+        else:
+            df.loc[df['Leaf'] == node, 'If_FreeSW'] = False
+    free_sw = df.drop_duplicates(['Leaf'])
+    free_sw = free_sw[(free_sw['If_FreeSW'] == True)].Leaf.values.tolist()
+    print 'Free Switch in short:'
+    print free_sw
+    return df

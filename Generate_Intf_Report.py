@@ -35,19 +35,20 @@ def gen_intf_report(session, report_file_name):
 				# get interface result
 				data = {
 					'No': index_n,
-					'POD': pod.rn,
-					'Leaf': node.rn,
-					'Interface': intf.id,
-					'Admin_St': intf.adminSt,
-					'Status': pminf.operSt,
-					'MTU': intf.mtu,
-					'Port Type': intf.portT
+					'POD': str(pod.rn),
+					'Leaf': str(node.rn),
+					'Interface': str(intf.id),
+					'Admin_St': str(intf.adminSt),
+					'Status': str(pminf.operSt),
+					'MTU': str(intf.mtu),
+					'Port Type': str(intf.portT)
 				}
-				# print(intf.dn)
+				# print(data)
 				frame = frame.append(pd.DataFrame(data), sort=False)
 				index_n[0] += 1
-			# break
+			#break
 	frame.name = 'Intf_Info'
+	frame = if_free_swtich(frame)
 	# Save the result of all interface status
 	to_excel_file(frame, report_file_name, False)
 	logger.info('ACI Interface Report Generated...')

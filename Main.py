@@ -12,6 +12,7 @@ import time
 
 # Output file & path
 report_file_name = 'ACI Interface Report.xlsx'
+target_intf = 'Target Interface.xlsx'
 
 
 def main():
